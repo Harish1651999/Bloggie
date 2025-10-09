@@ -11,10 +11,12 @@ namespace Bloggie.Web.Pages.Admin.Blogs
 
         [BindProperty]
         public BlogPost BlogPost { get; set; }
+
         public EditModel(BloggieDbContext bloggieDbContext)
         {
             this.bloggieDbContext = bloggieDbContext;
         }
+
         public async Task OnGet(Guid id)
         {
             BlogPost = await bloggieDbContext.BlogPosts.FindAsync(id);
