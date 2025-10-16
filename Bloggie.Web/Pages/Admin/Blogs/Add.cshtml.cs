@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Bloggie.Web.Data;
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Models.ViewModels;
@@ -40,7 +41,13 @@ namespace Bloggie.Web.Pages.Admin.Blogs
 
             await blogPostRepository.AddAsync(blogPost);
 
-            TempData["MessageDescription"] = "New blog post created!";
+            var notification = new Notification
+            {
+                Type = Enums.NotificationType.Success,
+                Message = "New blog created!"
+            };
+
+            TempData["Notification"] = JsonSerializer.Serialize(notification);
 
             return RedirectToPage("/Admin/Blogs/List");
         }
